@@ -11,15 +11,24 @@ type Account struct {
 }
 
 func main() {
+	//WaitGroup 할당
 	var wg sync.WaitGroup
 
-	account := &Account{0}
+	//Account 구조체 생성(계좌)
+	//account := &Account{0}
+	var account Account
+
+	//WaitGroup에 실행횟수 설정
 	wg.Add(10)
-	for i := 0; i < 10; i++ {
+
+	//고루틴을 반복하여 실행(1000번)
+	for i := 0; i < 1000; i++ {
 		fmt.Println("new goroutine:", i)
+
+		//
 		go func() {
 			for {
-				DepositAndWithdraw(account)
+				DepositAndWithdraw(&account)
 			}
 			wg.Done()
 		}()
